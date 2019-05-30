@@ -1,4 +1,4 @@
-
+import './global-styles.less';
 export const dva = {
   config: {
     onError(err) {
