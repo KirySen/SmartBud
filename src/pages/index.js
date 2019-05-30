@@ -1,17 +1,14 @@
-import styles from './index.less';
-import React from "react";
+import React, { Component } from 'react';
+import router from 'umi/router'
 
+export default class index extends Component{
+  componentDidMount(){
+    router.replace('/unit')
+  }
+  render(){
+    return null
+  }
 
-export default function() {
-  return (
-    <div className={styles.normal}>
-      <ul className={styles.list}>
-        <li>
-          <a href="https://umijs.org/guide/getting-started.html">
-            Getting Started
-          </a>
-        </li>
-      </ul>
-    </div>
-  );
 }
+
+

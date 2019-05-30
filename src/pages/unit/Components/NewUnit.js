@@ -4,8 +4,8 @@ import GaoDeMap from './MapForm';
 
 class unit extends Component {
   state = {
-    MapVisible: false,
-    Address: null,
+    MapVisible: false,    //新建Modal
+    Address: {},          //定位数据
   };
   //打开定位
   locationFocus = () => {
@@ -23,6 +23,7 @@ class unit extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    // const { name,linkman,tel,business,keywords,address,street } = this.props.record;
     const TextArea = Input.TextArea;
     const ModalLayout = {
       labelCol: {
@@ -40,6 +41,7 @@ class unit extends Component {
             label={'单位名称'}
           >
             {getFieldDecorator('name', {
+              // initialValue:name,
               rules: [{ required: true, message: '请填写单位名称！' }],
             })(
               <Input/>,
@@ -49,6 +51,7 @@ class unit extends Component {
             label={'联系人'}
           >
             {getFieldDecorator('linkman', {
+              // initialValue:linkman,
               rules: [{ required: true, message: '请填写联系人' }],
             })(
               <Input/>,
@@ -58,6 +61,7 @@ class unit extends Component {
             label={'电话号码'}
           >
             {getFieldDecorator('tel', {
+              // initialValue:tel,
               rules: [{ required: true, message: '请填写电话号码' }],
             })(
               <Input/>,
@@ -67,6 +71,7 @@ class unit extends Component {
             label={'经营范围'}
           >
             {getFieldDecorator('business', {
+              // initialValue:business,
               rules: [{ required: true, message: '请选择经营范围' }],
             })(
               <Select>
@@ -80,7 +85,9 @@ class unit extends Component {
           <Form.Item
             label={'关键字'}
           >
-            {getFieldDecorator('keywords', {})(
+            {getFieldDecorator('keywords', {
+              // initialValue:keywords,
+            })(
               <TextArea/>,
             )}
           </Form.Item>
@@ -88,7 +95,7 @@ class unit extends Component {
             label={'地址'}
           >
             {getFieldDecorator('address',{
-
+              // initialValue: address,
             })(
               <Input/>
             )}
@@ -96,7 +103,9 @@ class unit extends Component {
           <Form.Item
             label={'街道地址'}
           >
-            {getFieldDecorator('street', {})(
+            {getFieldDecorator('street', {
+              initialValue:this.state.Address.address
+            })(
               <Input placeholder="点击打开定位"
                      onFocus={this.locationFocus}
                      suffix={<Icon type="environment"
