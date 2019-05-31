@@ -9,4 +9,8 @@ module.exports = {
       '@': require('path').resolve(__dirname, 'src'),
     },
   },
+  "theme":{
+    "primary-color": "#465362",
+    "border-radius-base":4,
+  }
 };

@@ -12,7 +12,6 @@ export default class Index extends Component {
   state = {};
 
   componentDidMount() {
-    console.log(this.props);
   }
 
   render() {
@@ -33,27 +32,40 @@ export default class Index extends Component {
                   <span><Icon type="sliders"/>往来单位</span>
                 </Link>
               </Menu.Item>
+              <SubMenu
+                key="order"
+                title={
+                  <span><Icon type="form"/>工单管理</span>
+                }
+              >
+                <Menu.Item key="List">
+                  <Link to='/order'>
+                    <span><Icon type="snippets"/>工单列表</span>
+                  </Link>
+                </Menu.Item>
               <Menu.Item key="/order">
-                <Link to='/order'>
-                  <span><Icon type="snippets"/>工单</span>
+                <Link to='/order/newList'>
+                  <span><Icon type="snippets"/>创建工单</span>
                 </Link>
               </Menu.Item>
+              </SubMenu>
               <Menu.Item key="/warehouse">
                 <Link to='/warehouse'>
                   <span><Icon type='shopping-cart'/>货品详情</span>
                 </Link>
               </Menu.Item>
               <SubMenu
-                key="sub2"
+                key="employee"
                 title={
-                  <span>
-                  <Icon type="team"/>
-                  <span>Team</span>
-                </span>
+                  <span><Icon type="team"/>员工管理</span>
                 }
               >
-                <Menu.Item key="6">Team 1</Menu.Item>
-                <Menu.Item key="8">Team 2</Menu.Item>
+                <Menu.Item key="/employee">
+                  <Link to={'/employee'}>是</Link>
+                </Menu.Item>
+                <Menu.Item key="8">
+                  <Link to={'/employee'}>是</Link>
+                </Menu.Item>
               </SubMenu>
               <Menu.Item key="9">
                 <Icon type="file"/>

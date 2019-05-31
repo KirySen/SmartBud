@@ -54,7 +54,9 @@ class Callas extends Component {
               }]
             },
           )
-          (<Input disabled/>)}
+          (
+            <Input disabled={true}/>
+          )}
         </FormItem>
         <AMap setMarker={this.setMarker}/>
         <FormItem>
