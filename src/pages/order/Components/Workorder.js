@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import {Form,Input,Select,InputNumber,message} from 'antd'
 
-export default class Work extends Component{
+class Work extends Component{
 state={
   UnitList:null
 };
@@ -23,8 +23,18 @@ fetch('/api/unit/search')
 };
   render(){
     const { getFieldDecorator } = this.props.form;
+    const ModalLayout = {
+      labelCol: {
+        xs: { span: 1 },
+        sm: { span: 2 },
+      },
+      wrapperCol: {
+        xs: { span: 2 },
+        sm: { span: 6 },
+      },
+    };
     return(
-      <Form>
+      <Form {...ModalLayout}>
         <Form.Item
           label={'受理人'}
         >
@@ -62,7 +72,7 @@ fetch('/api/unit/search')
           {getFieldDecorator('quantity',{
 
           })(
-            <InputNumber/>
+            <InputNumber style={{width:308.8}}/>
           )}
         </Form.Item>
         <Form.Item
@@ -71,7 +81,7 @@ fetch('/api/unit/search')
           {getFieldDecorator('unitPrice',{
 
           })(
-            <InputNumber/>
+            <InputNumber style={{width:308.8}}/>
           )}
         </Form.Item>
         <Form.Item
@@ -94,3 +104,5 @@ fetch('/api/unit/search')
     )
   }
 }
+const AddModal = Form.create()(Work);
+export default AddModal;

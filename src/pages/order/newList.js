@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { PageHeader, Typography, Steps, Button, message, Card, Divider, Form } from 'antd';
 import styles from './index.less';
 import Work from './Components/Workorder'
+
 export default class order extends Component {
   state = {
     current: 0,
@@ -70,8 +71,6 @@ export default class order extends Component {
     const steps = [
       {
         title: '填写工单信息',
-        content: '',
-        render: () => <Work/>
       },
       {
         title: '确认信息',
@@ -95,7 +94,7 @@ export default class order extends Component {
               <Step key={item.title} title={item.title}/>
             ))}
           </Steps>
-          <div className={styles.steps_content}>{steps[current].content}</div>
+          <div className={styles.steps_content}>{current < steps.length - 1&&<div className={styles.component}><Work/></div>}</div>
           <div className={styles.steps_action}>
             {current < steps.length - 1 && (
               <Button type="primary" onClick={() => this.next()}>
