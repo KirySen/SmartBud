@@ -21,16 +21,17 @@ fetch('/api/unit/search')
     message.error('单位列表获取失败')
   )
 };
+
   render(){
     const { getFieldDecorator } = this.props.form;
     const ModalLayout = {
       labelCol: {
-        xs: { span: 1 },
-        sm: { span: 2 },
+        xs: { span: 2 },
+        sm: { span: 8 },
       },
       wrapperCol: {
-        xs: { span: 2 },
-        sm: { span: 6 },
+        xs: { span: 6 },
+        sm: { span: 8 },
       },
     };
     return(
@@ -72,7 +73,7 @@ fetch('/api/unit/search')
           {getFieldDecorator('quantity',{
 
           })(
-            <InputNumber style={{width:308.8}}/>
+            <InputNumber style={{width:411}}/>
           )}
         </Form.Item>
         <Form.Item
@@ -81,7 +82,7 @@ fetch('/api/unit/search')
           {getFieldDecorator('unitPrice',{
 
           })(
-            <InputNumber style={{width:308.8}}/>
+            <InputNumber style={{width:411}}/>
           )}
         </Form.Item>
         <Form.Item

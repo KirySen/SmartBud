@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { PageHeader, Typography, Steps, Button, message, Card, Divider, Form } from 'antd';
+import { PageHeader, Typography, Steps, Button, message, Card, Divider, Alert,Descriptions} from 'antd';
 import styles from './index.less';
-import Work from './Components/Workorder'
+import Work from './Components/Workorder';
 
 export default class order extends Component {
   state = {
     current: 0,
+    formDate:{}
   };
 
   next() {
@@ -18,6 +19,18 @@ export default class order extends Component {
     this.setState({ current });
   }
 
+  submit(){
+    message.success('提交成功');
+    const current = this.state.current + 1;
+    this.setState({current})
+  }
+  more(){
+    const current = 0;
+    this.setState({current:current})
+  }
+  SetFormData= (e)=>{
+    this.setState({formDate:e})
+  };
   render() {
     const { Paragraph } = Typography;
     const routes = [
@@ -94,27 +107,47 @@ export default class order extends Component {
               <Step key={item.title} title={item.title}/>
             ))}
           </Steps>
-          <div className={styles.steps_content}>{current < steps.length - 1&&<div className={styles.component}><Work/></div>}</div>
+          <div className={styles.steps_content}>{current === 0 &&
+          <div className={styles.component}>
+            <Alert message="填写工单填写工单填写工单" type="info" showIcon closable style={{width:500,margin:'10px auto'}}/>
+            <Work SetFormData={this.SetFormData}/>
+          </div>}
+            {current===1&&(
+              <Descriptions
+              title={'工单详情'}
+                >
+                <Descriptions.Item label="受理人"></Descriptions.Item>
+                <Descriptions.Item label="品类"></Descriptions.Item>
+                <Descriptions.Item label="原产国"></Descriptions.Item>
+                <Descriptions.Item label="数量"></Descriptions.Item>
+                <Descriptions.Item label="单价"></Descriptions.Item>
+                <Descriptions.Item label="关联单位"></Descriptions.Item>
+              </Descriptions>
+            )}
+          </div>
           <div className={styles.steps_action}>
-            {current < steps.length - 1 && (
+            {current < steps.length - 2 && (
               <Button type="primary" onClick={() => this.next()}>
                 下一步
               </Button>
             )}
-            {current === steps.length - 1 && (
-              <Button type="primary" onClick={() => message.success('已提交')}>
+            {current === steps.length - 2 && (
+              <Button type="primary" onClick={() => this.submit()}>
                 提交
               </Button>
             )}
-            {current > 0 && (
+            {current < 2  &&(
               <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
                 上一步
               </Button>
             )}
+            {current === 2 && (
+              <Button onClick={() => this.more()}>再创建工单</Button>
+            )}
           </div>
           <Divider>提示</Divider>
           <div className={styles.tip}>
-            <>填写的工单不可删除请再三确认后</>
+            <p>填写的工单不可删除请再三确认后</p>
             <p>所有工单都会记录下来</p>
           </div>
         </Card>

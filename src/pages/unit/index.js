@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Input, Table, Modal, Dropdown, Icon, Menu } from 'antd';
+import { Button, Input, Table, Modal, Dropdown, Icon, Menu,message } from 'antd';
 import NewUnit from './Components/NewUnit';
 
 export default class unit extends Component {
@@ -13,9 +13,21 @@ export default class unit extends Component {
   };
 
   componentDidMount() {
-
+    this.loading()
   }
-
+loading=()=>{
+  fetch('/api/unit/all')
+    .then(response=>response.json())
+    .then(data=>{
+      console.log(data);
+      this.setState({
+        unitList:data
+      })
+    })
+    .catch(()=>{
+      message.error('获取数据失败！')
+    })
+};
   /*
   * 创建单位Modal
   * */
@@ -111,18 +123,24 @@ export default class unit extends Component {
             columns={columns}
             dataSource={this.state.unitList}
             rowSelection={{ electedRowKeys: this.state.selected, selections: true, onChange: this.onChangeTable }}
-            rowKey="id" pagination={{ pageSize: 10 }}
+            rowKey='uid'
+            pagination={{ pageSize: 10 }}
           />
         </div>
         <Modal
           title={'新建往来单位'}
           centered
+          footer={null}
           visible={this.state.newUnitModal}
           onCancel={() => {
             this.setState({ newUnitModal: false });
           }}
         >
-          <NewUnit/>
+          <NewUnit record={this.state.record}
+                   onSuccess={() => {
+                     this.setState({ newUnitModal: false, recode: {} });
+                     this.loading();
+                   }}/>
         </Modal>
       </div>
     );

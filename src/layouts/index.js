@@ -23,7 +23,7 @@ export default class Index extends Component {
       <LocaleProvider locale={zh_CN}>
         <Layout style={{ minHeight: '100vh' }}>
           <Sider
-            style={{ backgroundColor: '#465362' }}
+            style={{ backgroundColor: '#465362'}}
           >
             <div className={styles.logo}/>
             <Menu style={{ backgroundColor: '#465362' }} theme='dark' defaultSelectedKeys={[pathname]} mode="inline">
