@@ -15,7 +15,8 @@
     "react-amap": "^1.2.8",
     "react-dom": "^16.7.0",
     "react-router-dom": "4.3.1",
-    "scriptjs": "^2.5.9"
+    "scriptjs": "^2.5.9",
+    "yarn": "^1.16.0"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
