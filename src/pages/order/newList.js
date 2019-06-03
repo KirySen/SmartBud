@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PageHeader, Typography, Steps, Button, message, Card, Divider, Alert,Descriptions} from 'antd';
 import styles from './index.less';
-import Work from './Components/Workorder';
+import WorkOrder from './Components/Workorder';
 
 export default class order extends Component {
   state = {
@@ -22,11 +22,11 @@ export default class order extends Component {
   submit(){
     message.success('提交成功');
     const current = this.state.current + 1;
-    this.setState({current})
+    this.setState({current});
   }
   more(){
     const current = 0;
-    this.setState({current:current})
+    this.setState({current:current});
   }
   SetFormData= (e)=>{
     this.setState({formDate:e})
@@ -110,18 +110,18 @@ export default class order extends Component {
           <div className={styles.steps_content}>{current === 0 &&
           <div className={styles.component}>
             <Alert message="填写工单填写工单填写工单" type="info" showIcon closable style={{width:500,margin:'10px auto'}}/>
-            <Work SetFormData={this.SetFormData}/>
+            <WorkOrder SetFormData={this.SetFormData} wrappedComponentRef={(form) => this.form = form}/>
           </div>}
             {current===1&&(
               <Descriptions
               title={'工单详情'}
                 >
-                <Descriptions.Item label="受理人"></Descriptions.Item>
-                <Descriptions.Item label="品类"></Descriptions.Item>
-                <Descriptions.Item label="原产国"></Descriptions.Item>
-                <Descriptions.Item label="数量"></Descriptions.Item>
-                <Descriptions.Item label="单价"></Descriptions.Item>
-                <Descriptions.Item label="关联单位"></Descriptions.Item>
+                <Descriptions.Item label="受理人">{this.state.formDate.accept}</Descriptions.Item>
+                <Descriptions.Item label="品类">{this.state.formDate.category}</Descriptions.Item>
+                <Descriptions.Item label="原产国">{this.state.formDate.born}</Descriptions.Item>
+                <Descriptions.Item label="数量">{this.state.formDate.quantity}</Descriptions.Item>
+                <Descriptions.Item label="单价">{this.state.formDate.unitPrice}</Descriptions.Item>
+                <Descriptions.Item label="关联单位">{this.state.formDate.correlationUnit}</Descriptions.Item>
               </Descriptions>
             )}
           </div>
@@ -136,7 +136,7 @@ export default class order extends Component {
                 提交
               </Button>
             )}
-            {current < 2  &&(
+            {current === 1 &&(
               <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
                 上一步
               </Button>
