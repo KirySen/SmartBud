@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import { Button, Input, Table, message, Modal } from 'antd';
+import { Button, Input, Table, message, Modal, Popconfirm} from 'antd';
 import NewEmployee from './NewEmployee';
 import Sex from './Sex';
 
@@ -11,6 +11,7 @@ export default class Employee extends Component{
     visible: false,         // 模态框
 
   };
+
 
   SearchKeyword = (e) => {
     this.setState({
@@ -32,17 +33,22 @@ export default class Employee extends Component{
     this.setState({
       visible: false
     });
-    this.handleSubmit();
   };
 
-  handleSubmit = ()=> {
-    console.log('1')
-  };
 
   handleCancel = ()=> {
     this.setState({
       visible: false
     });
+  };
+
+  confirm = (e)=> {
+    this.deleteEmployee(e);
+    message.success('成功删除');
+  };
+
+  cancel = ()=> {
+    message.error('取消删除');
   };
 
   deleteEmployee = (index)=> {
@@ -89,9 +95,15 @@ export default class Employee extends Component{
         title: '操作',
         dataIndex: 'operation',
         render: (text,index) => (
-          <span>
-            <a href="javascript:" onClick={this.deleteEmployee.bind(this,index.uid)}>删除</a>
-          </span>
+          <Popconfirm
+            title={`确定删除${index.name}?`}
+            onConfirm={this.confirm.bind(this,index.uid)}
+            onCancel={this.cancel}
+            okText={'确定'}
+            cancelText={'取消'}
+          >
+            <Button>删除</Button>
+          </Popconfirm>
         )
       },
     ];
@@ -128,7 +140,7 @@ export default class Employee extends Component{
           onCancel={this.handleCancel}
           footer={null}
         >
-          <NewEmployee/>
+          <NewEmployee onSubmit={this.handleOk.bind(this)}/>
         </Modal>
       </div>
     )

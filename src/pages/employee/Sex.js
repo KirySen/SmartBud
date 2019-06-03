@@ -8,6 +8,8 @@ export default function(props) {
     return (
       <Tag>男</Tag>
     )
+  }else {
+    return '';
   }
 
 }
