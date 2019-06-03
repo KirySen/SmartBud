@@ -32,6 +32,11 @@ export default class Employee extends Component{
     this.setState({
       visible: false
     });
+    this.handleSubmit();
+  };
+
+  handleSubmit = ()=> {
+    console.log('1')
   };
 
   handleCancel = ()=> {
@@ -40,8 +45,8 @@ export default class Employee extends Component{
     });
   };
 
-  deleteEmployee = (e)=> {
-    console.log(e)
+  deleteEmployee = (index)=> {
+    console.log(index);
   };
 
   loading = ()=>{
@@ -83,13 +88,12 @@ export default class Employee extends Component{
       {
         title: '操作',
         dataIndex: 'operation',
-        render: () => (
+        render: (text,index) => (
           <span>
-            <a href="javascript:;" onClick={this.deleteEmployee} >删除</a>
+            <a href="javascript:" onClick={this.deleteEmployee.bind(this,index.uid)}>删除</a>
           </span>
         )
       },
-
     ];
     return (
       <div className="page-content">
@@ -122,6 +126,7 @@ export default class Employee extends Component{
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
+          footer={null}
         >
           <NewEmployee/>
         </Modal>
