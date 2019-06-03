@@ -9,6 +9,9 @@ class employee extends Component{
 
   handleSubmit = ()=> {
     this.props.form.validateFields((error, values)=>{
+      if (error === null) {
+        this.props.onSubmit();
+      }
       console.log(values);
     })
   };
@@ -44,7 +47,7 @@ class employee extends Component{
             {getFieldDecorator('phone', {
               rules: [{required: false, message: '请输入联系方式'}]
             })(
-              <Input/>
+              <Input />
             )}
           </Form.Item>
           <Form.Item
