@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Select, Icon, Modal } from 'antd';
+import { Form, Input, Select, Icon, Modal ,Button} from 'antd';
 import GaoDeMap from './MapForm';
 
 class unit extends Component {
@@ -20,10 +20,16 @@ class unit extends Component {
       MapVisible: false,
     });
   };
+  submit=()=>{
+    this.props.form.validateFields((err,values)=>{
+      if (!err){
 
+      }
+    })
+  };
   render() {
     const { getFieldDecorator } = this.props.form;
-    // const { name,linkman,tel,business,keywords,address,street } = this.props.record;
+    const { name,linkman,tel,business,keywords,address,street } = this.props.record;
     const TextArea = Input.TextArea;
     const ModalLayout = {
       labelCol: {
@@ -41,7 +47,7 @@ class unit extends Component {
             label={'单位名称'}
           >
             {getFieldDecorator('name', {
-              // initialValue:name,
+              initialValue:name,
               rules: [{ required: true, message: '请填写单位名称！' }],
             })(
               <Input/>,
@@ -51,7 +57,7 @@ class unit extends Component {
             label={'联系人'}
           >
             {getFieldDecorator('linkman', {
-              // initialValue:linkman,
+              initialValue:linkman,
               rules: [{ required: true, message: '请填写联系人' }],
             })(
               <Input/>,
@@ -61,7 +67,7 @@ class unit extends Component {
             label={'电话号码'}
           >
             {getFieldDecorator('tel', {
-              // initialValue:tel,
+              initialValue:tel,
               rules: [{ required: true, message: '请填写电话号码' }],
             })(
               <Input/>,
@@ -71,7 +77,7 @@ class unit extends Component {
             label={'经营范围'}
           >
             {getFieldDecorator('business', {
-              // initialValue:business,
+              initialValue:business,
               rules: [{ required: true, message: '请选择经营范围' }],
             })(
               <Select>
@@ -86,7 +92,7 @@ class unit extends Component {
             label={'关键字'}
           >
             {getFieldDecorator('keywords', {
-              // initialValue:keywords,
+              initialValue:keywords,
             })(
               <TextArea/>,
             )}
@@ -95,7 +101,7 @@ class unit extends Component {
             label={'地址'}
           >
             {getFieldDecorator('address',{
-              // initialValue: address,
+              initialValue: address,
             })(
               <Input/>
             )}
@@ -104,7 +110,7 @@ class unit extends Component {
             label={'街道地址'}
           >
             {getFieldDecorator('street', {
-              initialValue:this.state.Address.address
+              initialValue:this.state.Address.address ? this.state.Address.address:street,
             })(
               <Input placeholder="点击打开定位"
                      onFocus={this.locationFocus}
@@ -115,6 +121,13 @@ class unit extends Component {
                      }
               />,
             )}
+          </Form.Item>
+          <Form.Item>
+            <Button
+              type={'primary'}
+              style={{marginLeft:'200px'}}
+              onClick={this.submit}
+            >提交</Button>
           </Form.Item>
         </Form>
         <Modal
