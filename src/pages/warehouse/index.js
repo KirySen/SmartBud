@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, message } from 'antd';
+import { Card, message } from 'antd';
 import styles from './index.less';
 
 export default class Ware extends Component {

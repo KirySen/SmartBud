@@ -6,9 +6,7 @@ class Callas extends Component {
   state = {
     marker: {},
   };
-
   setMarker = (item) => {
-
     this.setState({
       marker: item,
     });
@@ -16,7 +14,6 @@ class Callas extends Component {
       address:item.address
     })
   };
-
   onSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
@@ -24,9 +21,9 @@ class Callas extends Component {
         console.log(this.state.marker,123);
         this.props.setAddress(this.state.marker);
       }
+      console.log(values);
     });
   };
-
   render() {
     const { getFieldDecorator } = this.props.form;
     const FormItem = Form.Item;

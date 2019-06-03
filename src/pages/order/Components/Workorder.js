@@ -1,5 +1,5 @@
-import React,{Component} from 'react'
-import {Form,Input,Select,InputNumber,message} from 'antd'
+import React, { Component } from 'react';
+import { Form, Input, InputNumber, message, Select,Button } from 'antd';
 
 class Work extends Component{
 state={
@@ -21,7 +21,18 @@ fetch('/api/unit/search')
     message.error('单位列表获取失败')
   )
 };
-
+  Check  = ()=>{
+    this.props.form.validateFields((err,values)=>{
+      if (!err){
+      return this.props.SetFormData(values)
+      }
+      }
+    )
+  };
+  getItemsValue = ()=>{                              //自定义方法，用来传递数据（需要在父组件中调用获取数据）
+         //获取一组输入控件的值，如不传入参数，则获取全部组件的值
+    return this.props.form.getFieldsValue()
+  };
   render(){
     const { getFieldDecorator } = this.props.form;
     const ModalLayout = {
@@ -34,6 +45,7 @@ fetch('/api/unit/search')
         sm: { span: 8 },
       },
     };
+
     return(
       <Form {...ModalLayout}>
         <Form.Item
@@ -52,9 +64,9 @@ fetch('/api/unit/search')
 
           })(
             <Select>
-              <Select.Option value={'semi_finished'}>半成品</Select.Option>
-              <Select.Option value={'product'}>产品</Select.Option>
-              <Select.Option value={'material'}>原材料</Select.Option>
+              <Select.Option value={'半成品'}>半成品</Select.Option>
+              <Select.Option value={'产品'}>产品</Select.Option>
+              <Select.Option value={'原材料'}>原材料</Select.Option>
             </Select>
           )}
         </Form.Item>
@@ -101,9 +113,12 @@ fetch('/api/unit/search')
             </Select>
           )}
         </Form.Item>
+        <Form.Item colon={false}>
+          <Button size={'small'} onClick={this.Check}>确认</Button>
+        </Form.Item>
       </Form>
     )
   }
 }
-const AddModal = Form.create()(Work);
-export default AddModal;
+const WorkOrder = Form.create()(Work);
+export default WorkOrder;

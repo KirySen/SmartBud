@@ -54,23 +54,9 @@ export default class Index extends Component {
                   <span><Icon type='shopping-cart'/>货品详情</span>
                 </Link>
               </Menu.Item>
-              <SubMenu
-                key="employee"
-                title={
-                  <span><Icon type="team"/>员工管理</span>
-                }
-              >
                 <Menu.Item key="/employee">
-                  <Link to={'/employee'}>是</Link>
+                  <Link to={'/employee'}><span><Icon type={'team'}/>员工管理</span></Link>
                 </Menu.Item>
-                <Menu.Item key="8">
-                  <Link to={'/employee'}>是</Link>
-                </Menu.Item>
-              </SubMenu>
-              <Menu.Item key="9">
-                <Icon type="file"/>
-                <span>File</span>
-              </Menu.Item>
             </Menu>
           </Sider>
           <Layout>

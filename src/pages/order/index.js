@@ -25,6 +25,8 @@ export default class Index extends Component{
       {title:'数量',dataIndex:'quantity'},
       {title:'单价',dataIndex:'unitPrice'},
       {title:'关联单位',dataIndex:'correlationUnit'},
+      {title:'操作',dataIndex:"Cao",
+      }
     ];
     return (
       <div className="page-content">
