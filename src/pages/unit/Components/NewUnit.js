@@ -20,31 +20,33 @@ class unit extends Component {
       MapVisible: false,
     });
   };
-  submit=(A)=>{
-
+  submit=(e)=>{
     this.props.form.validateFields((err,values)=>{
       if (!err){
-        if (A==='A') {
+        if (this.props.create) {
         fetch('/api/company/add', {
           method: 'post',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(values)
-        }).catch(e =>message.error(e))
-        }else {
-          let record = this.props.record;
-          fetch(`/api/company/${record.id}/update`,{
-            method: 'post',
+        })
+          .then(e=>e.json())
+          .catch(e =>message.error(e))
+        }else{
+          let id = this.props.record.id;
+          fetch(`/api/company/${id}/update`,{
+          method: 'post',
             headers: {
               'Content-Type': 'application/json'
             },
+            body:JSON.stringify(values)
           })
             .catch(e=>message.error(e))
         }
       }
     });
-    this.setState({MapVisible:true});
+    this.props.setNewUnitModal(false)
   };
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -66,7 +68,7 @@ class unit extends Component {
             label={'单位名称'}
           >
             {getFieldDecorator('name', {
-              initialValue:name,
+              initialValue:name?name:undefined,
               rules: [{ required: true, message: '请填写单位名称！' }],
             })(
               <Input/>,
@@ -76,7 +78,7 @@ class unit extends Component {
             label={'联系人'}
           >
             {getFieldDecorator('linkman', {
-              initialValue:linkman,
+              initialValue:linkman?linkman:undefined,
               rules: [{ required: true, message: '请填写联系人' }],
             })(
               <Input/>,
@@ -86,7 +88,7 @@ class unit extends Component {
             label={'电话号码'}
           >
             {getFieldDecorator('tel', {
-              initialValue:tel,
+              initialValue:tel?tel:undefined,
               rules: [{ required: true, message: '请填写电话号码' }],
             })(
               <Input/>,
@@ -96,7 +98,7 @@ class unit extends Component {
             label={'经营范围'}
           >
             {getFieldDecorator('business', {
-              initialValue:business,
+              initialValue:business?business:undefined,
               rules: [{ required: true, message: '请选择经营范围' }],
             })(
               <Select>
@@ -111,7 +113,7 @@ class unit extends Component {
             label={'关键字'}
           >
             {getFieldDecorator('keywords', {
-              initialValue:keywords,
+              initialValue:keywords?keywords:undefined,
             })(
               <TextArea/>,
             )}
@@ -120,7 +122,7 @@ class unit extends Component {
             label={'地址'}
           >
             {getFieldDecorator('address',{
-              initialValue: address,
+              initialValue: address?address:undefined,
             })(
               <Input/>
             )}
@@ -145,7 +147,7 @@ class unit extends Component {
             <Button
               type={'primary'}
               style={{marginLeft:'200px'}}
-              onClick={this.submit.bind(this,'A')}
+              onClick={this.submit.bind(this,this.props.record)}
             >提交</Button>
           </Form.Item>
         </Form>

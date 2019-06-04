@@ -20,7 +20,14 @@ export default class order extends Component {
   }
 
   submit(){
-    message.success('提交成功');
+        fetch('/api/order/add',{
+          method:'POST',
+          body: JSON.stringify(this.state.formDate)
+        })
+          .then(e=>{
+            message.success('提交成功');
+          })
+          .catch(e =>message.error(e));
     const current = this.state.current + 1;
     this.setState({current});
   }

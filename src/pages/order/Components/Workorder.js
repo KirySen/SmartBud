@@ -7,7 +7,7 @@ state={
 };
 getUnit=()=>{
 
-fetch('/api/unit/search')
+fetch('/api/company/list')
   .then(e=>e.json())
   .then(e=>{
     let C_Type = e.data.map((item) =>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Input, Table, Modal, Dropdown, Icon, Menu,message } from 'antd';
+import { Button, Input, Table, Modal, Dropdown, Icon, Menu, message } from 'antd';
 import NewUnit from './Components/NewUnit';
 
 export default class unit extends Component {
@@ -10,30 +10,39 @@ export default class unit extends Component {
     record: {},
     clickTableItem: [],   //表格选中的Id
     selected: {},          //表格选中的数组
+    create: 1,
   };
 
   componentDidMount() {
-    this.loading()
+    this.loading();
   }
-loading=()=>{
-  fetch('/api/unit/all')
-    .then(response=>response.json())
-    .then(data=>{
-      console.log(data);
-      this.setState({
-        unitList:data
+
+  loading = () => {
+    fetch('/api/company/list')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        this.setState({
+          unitList: data,
+        });
       })
-    })
-    .catch(()=>{
-      message.error('获取数据失败！')
-    })
-};
+      .catch(() => {
+        message.error('获取数据失败！');
+      });
+  };
   /*
   * 创建单位Modal
   * */
   CreateUnit = () => {
     this.setState({
       newUnitModal: true,
+      create: 2,
+    });
+  };
+  //子表單控制父表單
+  setNewUnitModal = (e) => {
+    this.setState({
+      newUnitModal: e,
     });
   };
   //保存及上传按钮
@@ -46,10 +55,14 @@ loading=()=>{
     });
   };
   SearchUnit = () => {
-    fetch('api/sskdj/sera')
-      .then(e=>e.json())
-      .then(data=>console.log(data))
-      .catch(e=>message.error(e))
+    fetch(`/api/company/list?name=${encodeURI(this.state.Keywords)}`, {
+      method: 'GET',
+    })
+      .then(e => e.json())
+      .then((data) => {
+        this.setState({ unitList: data });
+      })
+      .catch(e => message.error(e));
   };
   /*
     * 表格onChange事件
@@ -63,7 +76,7 @@ loading=()=>{
   };
   handleDropdown = (record) => {
     return <Menu>
-      <Menu.Item onClick={this.Update.bind(this, record.id)}>更新</Menu.Item>
+      <Menu.Item onClick={this.Update.bind(this, record)}>更新</Menu.Item>
       <Menu.Item onClick={this.delete.bind(this, record.id)}>删除</Menu.Item>
     </Menu>;
   };
@@ -74,11 +87,18 @@ loading=()=>{
     });
   };
   delete = (id) => {
+    fetch(`/api/company/${id}/remove`, {
+      method: 'post',
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+      .catch(e => message.error(e));
+  };
+  Unit = () => {
 
   };
-  Unit=()=>{
 
-  };
   render() {
     const columns = [
       { title: '单位编号', dataIndex: 'unitNumber' },
@@ -141,11 +161,9 @@ loading=()=>{
           }}
         >
           <NewUnit record={this.state.record}
-                   onSuccess={() => {
-                     this.setState({ newUnitModal: false, recode: {} });
-                     this.loading();
-                   }}/>
-
+                   create={this.CreateUnit}
+                   setNewUnitModal={this.setNewUnitModal}
+          />
         </Modal>
       </div>
     );
