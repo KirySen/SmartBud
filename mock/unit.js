@@ -6,7 +6,7 @@ export default {
       name:'蒙牛',
       linkman:'张先生',
       tel:'154248546874',
-      business:'trade',
+      business:'服务',
       keywords:'SSD',
       address:'广东省广州市',
       street:'天河区'

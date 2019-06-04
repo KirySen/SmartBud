@@ -64,9 +64,9 @@ fetch('/api/unit/search')
 
           })(
             <Select>
-              <Select.Option value={'semi_finished'}>半成品</Select.Option>
-              <Select.Option value={'product'}>产品</Select.Option>
-              <Select.Option value={'material'}>原材料</Select.Option>
+              <Select.Option value={'半成品'}>半成品</Select.Option>
+              <Select.Option value={'产品'}>产品</Select.Option>
+              <Select.Option value={'原材料'}>原材料</Select.Option>
             </Select>
           )}
         </Form.Item>

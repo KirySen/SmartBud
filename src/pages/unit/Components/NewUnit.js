@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Select, Icon, Modal ,Button} from 'antd';
+import { Form, Input, Select, Icon, Modal ,Button,message} from 'antd';
 import GaoDeMap from './MapForm';
 
 class unit extends Component {
@@ -20,12 +20,31 @@ class unit extends Component {
       MapVisible: false,
     });
   };
-  submit=()=>{
+  submit=(A)=>{
+
     this.props.form.validateFields((err,values)=>{
       if (!err){
-
+        if (A==='A') {
+        fetch('/api/company/add', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(values)
+        }).catch(e =>message.error(e))
+        }else {
+          let record = this.props.record;
+          fetch(`/api/company/${record.id}/update`,{
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+          })
+            .catch(e=>message.error(e))
+        }
       }
-    })
+    });
+    this.setState({MapVisible:true});
   };
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -81,10 +100,10 @@ class unit extends Component {
               rules: [{ required: true, message: '请选择经营范围' }],
             })(
               <Select>
-                <Select.Option value={'trade'}>贸易</Select.Option>
-                <Select.Option value={'wholesale'}>批发</Select.Option>
-                <Select.Option value={'retail'}>零售</Select.Option>
-                <Select.Option value={'service'}>服务</Select.Option>
+                <Select.Option value={'贸易'}>贸易</Select.Option>
+                <Select.Option value={'批发'}>批发</Select.Option>
+                <Select.Option value={'零售'}>零售</Select.Option>
+                <Select.Option value={'服务'}>服务</Select.Option>
               </Select>,
             )}
           </Form.Item>
@@ -126,7 +145,7 @@ class unit extends Component {
             <Button
               type={'primary'}
               style={{marginLeft:'200px'}}
-              onClick={this.submit}
+              onClick={this.submit.bind(this,'A')}
             >提交</Button>
           </Form.Item>
         </Form>
@@ -140,7 +159,7 @@ class unit extends Component {
           }}
           mask={false}
           footer={null}
-          destroyOnClose={true}
+          destroyOnClose
         >
           <GaoDeMap setAddress={this.setAddress}/>
         </Modal>

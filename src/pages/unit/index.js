@@ -46,7 +46,10 @@ loading=()=>{
     });
   };
   SearchUnit = () => {
-
+    fetch('api/sskdj/sera')
+      .then(e=>e.json())
+      .then(data=>console.log(data))
+      .catch(e=>message.error(e))
   };
   /*
     * 表格onChange事件
@@ -60,7 +63,7 @@ loading=()=>{
   };
   handleDropdown = (record) => {
     return <Menu>
-      <Menu.Item onClick={this.Update.bind(this, record)}>更新</Menu.Item>
+      <Menu.Item onClick={this.Update.bind(this, record.id)}>更新</Menu.Item>
       <Menu.Item onClick={this.delete.bind(this, record.id)}>删除</Menu.Item>
     </Menu>;
   };
@@ -130,6 +133,7 @@ loading=()=>{
         <Modal
           title={'新建往来单位'}
           centered
+          destroyOnClose
           footer={null}
           visible={this.state.newUnitModal}
           onCancel={() => {
@@ -141,6 +145,7 @@ loading=()=>{
                      this.setState({ newUnitModal: false, recode: {} });
                      this.loading();
                    }}/>
+
         </Modal>
       </div>
     );
