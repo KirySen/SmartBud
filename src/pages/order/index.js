@@ -1,11 +1,20 @@
 import React,{Component} from 'react'
-import { Button, Input, Table } from 'antd';
+import { Button, Input, Popconfirm, Table,message } from 'antd';
 import router from 'umi/router'
 export default class Index extends Component{
   state={
     orderList:null,
     clickTableItem:[],
     selected:{},
+  };
+  componentDidMount(){
+    this.loading()
+  }
+  loading = ()=>{
+    fetch('/api/order/list')
+      .then(e=>e.json())
+      .then(data=>this.setState({orderList:data}))
+      .catch(e=>message.error(e))
   };
   onChangeTable = (selectedRowKeys, selectedRows) => {
     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
@@ -17,6 +26,11 @@ export default class Index extends Component{
   Create=()=>{
     router.replace('./order/newList')
   };
+  confirm=(id)=>{
+    fetch(`/api/order/${id}/remove`)
+      .then(e=>{})
+      .catch(e=>message.error(e))
+  };
   render(){
     const columns= [
       {title:'订单编号',dataIndex:'orderNumber'},
@@ -25,7 +39,19 @@ export default class Index extends Component{
       {title:'数量',dataIndex:'quantity'},
       {title:'单价',dataIndex:'unitPrice'},
       {title:'关联单位',dataIndex:'correlationUnit'},
-      {title:'操作',dataIndex:"Cao",
+      {
+        title: '操作', dataIndex: "Cao",
+        render: (text, record) => (
+          <Popconfirm
+            title={`确定删除?`}
+            onConfirm={this.confirm.bind(this,record.id)}
+            onCancel={this.cancel}
+            okText={'确定'}
+            cancelText={'取消'}
+          >
+            <Button>删除</Button>
+          </Popconfirm>
+        )
       }
     ];
     return (
