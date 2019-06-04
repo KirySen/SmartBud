@@ -1,9 +1,9 @@
-import React,{Component} from 'react'
-import { Button, Input, Table, message, Modal, Popconfirm} from 'antd';
+import React, { Component } from 'react';
+import { Button, Input, Table, message, Modal, Popconfirm } from 'antd';
 import NewEmployee from './NewEmployee';
 import Sex from './Sex';
 
-export default class Employee extends Component{
+export default class Employee extends Component {
   state = {
     Keywords: null,         // 搜索关键字
     employeeList: null,     // 员工数据
@@ -19,92 +19,94 @@ export default class Employee extends Component{
     });
   };
 
-  SearchEmployee = ()=> {
+  SearchEmployee = () => {
     console.log('SearchEmployee');
   };
 
-  showModal = ()=> {
+  showModal = () => {
     this.setState({
-      visible: true
+      visible: true,
     });
   };
 
-  handleOk = ()=> {
+  handleOk = () => {
     this.setState({
-      visible: false
+      visible: false,
     });
   };
 
 
-  handleCancel = ()=> {
+  handleCancel = () => {
     this.setState({
-      visible: false
+      visible: false,
     });
   };
 
-  confirm = (e)=> {
+  confirm = (e) => {
     this.deleteEmployee(e);
     message.success('成功删除');
   };
 
-  cancel = ()=> {
+  cancel = () => {
     message.error('取消删除');
   };
 
-  deleteEmployee = (index)=> {
+  deleteEmployee = (index) => {
     console.log(index);
   };
 
-  loading = ()=>{
+  loading = () => {
     fetch('/api/employee/all')
-      .then(response =>response.json())
-      .then(data=>{
+      .then(response => response.json())
+      .then(data => {
         this.setState({
-          employeeList: data
-        })
+          employeeList: data,
+        });
       })
-      .catch((e)=>{
-        message.error('未能得到数据')
-      })
+      .catch((e) => {
+        message.error('未能得到数据');
+      });
   };
-  componentDidMount(){
-    this.loading()
+
+  componentDidMount() {
+    this.loading();
   }
-  render(){
+
+  render() {
     const columns = [
       {
         title: '员工姓名',
-        dataIndex: 'name'
+        dataIndex: 'name',
       },
       {
         title: '性别',
         dataIndex: 'sex',
         render: (sex) => (
-          <Sex sex={sex} />
-        )
+          <Sex sex={sex}/>
+        ),
       },
       {
-        'title': '业务类型',
-        dataIndex: 'business_type'
+        title: '业务类型',
+        dataIndex: 'business_type',
       },
       {
         title: '联系方式',
-        dataIndex: 'phone'
+        dataIndex: 'phone',
       },
       {
         title: '操作',
         dataIndex: 'operation',
-        render: (text,index) => (
+        render: (text, index) => (
           <Popconfirm
             title={`确定删除${index.name}?`}
-            onConfirm={this.confirm.bind(this,index.uid)}
+            onConfirm={this.confirm.bind(this, index.uid)}
             onCancel={this.cancel}
             okText={'确定'}
             cancelText={'取消'}
           >
             <Button>删除</Button>
           </Popconfirm>
-        )
+        ),
       },
     ];
     return (
@@ -143,6 +145,6 @@ export default class Employee extends Component{
           <NewEmployee onSubmit={this.handleOk.bind(this)}/>
         </Modal>
       </div>
-    )
+    );
   };
 };

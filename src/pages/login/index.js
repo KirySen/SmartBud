@@ -1,69 +1,47 @@
 import React, { Component } from 'react';
-import { Button, Input, Form, Icon, message, Row, Col } from 'antd';
-
-import Style from './index.less';
-
+import { Tabs } from 'antd';
+import styles from './index.less';
+import LoginForm from './Components/LoginForm';
+import logo from '@/assets/logo.png';
 class Login extends Component {
 
-  handleSubmit = (e)=> {
-    e.preventDefault();
-    this.props.form.validateFields((error, values)=>{
-      if (error === null) {
-        this.props.onSubmit();
-      }
-      console.log(values);
-    })
-  };
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+
     return (
-      <div className={Style.login}>
-        <Form onSubmit={this.handleSubmit}>
-          <Row type='flex' justify='center'>
-            <Col>
-              <h1>用户登录</h1>
-            </Col>
-          </Row>
-          <Row type='flex' justify='center'>
-            <Col>
-              <Form.Item>
-                {getFieldDecorator('username', {
-                  rules: [{required: true, message: '请输入用户名'}]
-                })(
-                  <Input
-                    prefix={<Icon type='user'/>}
-                    placeholder={'用户名'}
-                  />
-                )}
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row type='flex' justify='center'>
-            <Col>
-              <Form.Item>
-                {getFieldDecorator('password', {
-                  rules: [{required: true, message: '请输入密码'}]
-                })(
-                  <Input
-                    prefix={<Icon type='lock'/>}
-                    placeholder={'请输入密码'}
-                    type='password'
-                  />
-                )}
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row type='flex' justify='center'>
-            <Col>
-              <Button htmlType='submit' type='primary' block>登录</Button>
-            </Col>
-          </Row>
-        </Form>
+
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <div className={styles.top}>
+            <div className={styles.header}>
+              <a href={'/'}>
+                <img className={styles.logo} src={logo}/>
+                <span className={styles.title}>SmartBud</span>
+              </a>
+
+            </div>
+            <div className={styles.desc}>公司描述公司描述公司描述</div>
+          </div>
+          <div className={styles.main}>
+            <div className={styles.login}>
+
+              <Tabs defaultActiveKey="account" animated={false}>
+                <Tabs.TabPane tab="账号密码登陆" key="account">
+                  <LoginForm onSuccess={this.props.onSuccess}/>
+                </Tabs.TabPane>
+                <Tabs.TabPane tab="手机号登陆" disabled key="mobile">
+                </Tabs.TabPane>
+              </Tabs>
+
+
+            </div>
+          </div>
+        </div>
+
       </div>
+
     );
-  };
+  }
 }
 
-const WrappedRegistrationForm = Form.create()(Login);
-export default WrappedRegistrationForm;
+export default Login;
