@@ -18,8 +18,12 @@ export default class unit extends Component {
   }
 
   loading = () => {
-    fetch('/api/company/list')
-      .then(response => response.json())
+    fetch('/api/unit/all')
+      .then(e=>{if (e.ok) {
+        return e.json()
+      } else {
+        return Promise.reject('出错啦!')
+      }})
       .then(data => {
         console.log(data);
         this.setState({
@@ -36,7 +40,7 @@ export default class unit extends Component {
   CreateUnit = () => {
     this.setState({
       newUnitModal: true,
-      create: 2,
+      record:{}
     });
   };
   //子表單控制父表單
@@ -58,7 +62,11 @@ export default class unit extends Component {
     fetch(`/api/company/list?name=${encodeURI(this.state.Keywords)}`, {
       method: 'GET',
     })
-      .then(e => e.json())
+      .then(e=>{if (e.ok) {
+        return e.json()
+      } else {
+        return Promise.reject('出错啦!')
+      }})
       .then((data) => {
         this.setState({ unitList: data });
       })
@@ -74,10 +82,10 @@ export default class unit extends Component {
       selected: selectedRows,
     });
   };
-  handleDropdown = (record) => {
+  handleDropdown = (text,record) => {
     return <Menu>
       <Menu.Item onClick={this.Update.bind(this, record)}>更新</Menu.Item>
-      <Menu.Item onClick={this.delete.bind(this, record.id)}>删除</Menu.Item>
+      <Menu.Item onClick={this.delete.bind(this, record)}>删除</Menu.Item>
     </Menu>;
   };
   Update = (record) => {
@@ -87,12 +95,17 @@ export default class unit extends Component {
     });
   };
   delete = (id) => {
-    fetch(`/api/company/${id}/remove`, {
+    fetch(`/api/company/${id.unitNumber}/remove`, {
       method: 'post',
       headers: {
         'Content-type': 'application/json',
       },
     })
+      .then(e=>{if (e.ok) {
+        return e.json()
+      } else {
+        return Promise.reject('出错啦!')
+      }})
       .catch(e => message.error(e));
   };
   Unit = () => {
@@ -112,7 +125,7 @@ export default class unit extends Component {
       {
         title: '操作', dataIndex: 'operation',
         render: (text, record) => (
-          <Dropdown overlay={this.handleDropdown(record)} trigger={['hover']}>
+          <Dropdown overlay={this.handleDropdown(text,record)} trigger={['hover']}>
             <a>
               操作 <Icon type="caret-down"/>
             </a>
@@ -161,7 +174,6 @@ export default class unit extends Component {
           }}
         >
           <NewUnit record={this.state.record}
-                   create={this.CreateUnit}
                    setNewUnitModal={this.setNewUnitModal}
           />
         </Modal>

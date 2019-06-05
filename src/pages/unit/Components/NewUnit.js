@@ -20,23 +20,27 @@ class unit extends Component {
       MapVisible: false,
     });
   };
-  submit=(e)=>{
+  submit=()=>{
     this.props.form.validateFields((err,values)=>{
+      console.log('values: ',values);
       if (!err){
-        if (this.props.create) {
+        if (!this.props.record.uid) {
         fetch('/api/company/add', {
-          method: 'post',
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(values)
         })
-          .then(e=>e.json())
+          .then(e=>{if (e.ok) {
+            return e.json()
+          } else {
+            return Promise.reject('出错啦!')
+          }})
           .catch(e =>message.error(e))
         }else{
-          let id = this.props.record.id;
-          fetch(`/api/company/${id}/update`,{
-          method: 'post',
+          fetch(`/api/company/${this.props.record.unitNumber}/update`,{
+          method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
@@ -147,7 +151,7 @@ class unit extends Component {
             <Button
               type={'primary'}
               style={{marginLeft:'200px'}}
-              onClick={this.submit.bind(this,this.props.record)}
+              onClick={this.submit}
             >提交</Button>
           </Form.Item>
         </Form>

@@ -12,8 +12,12 @@ export default class Index extends Component{
   }
   loading = ()=>{
     fetch('/api/order/list')
-      .then(e=>e.json())
-      .then(data=>this.setState({orderList:data}))
+      .then(e=>{if (e.ok) {
+        return e.json()
+      } else {
+        return Promise.reject('出错啦!')
+      }})
+      .then((data)=>{this.setState({orderList:data})})
       .catch(e=>message.error(e))
   };
   onChangeTable = (selectedRowKeys, selectedRows) => {
