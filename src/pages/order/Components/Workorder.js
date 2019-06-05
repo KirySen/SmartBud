@@ -8,7 +8,7 @@ state={
 getUnit=()=>{
 
 fetch('/api/company/list')
-  .then(e=>e.json())
+  .then(e=>{})
   .then(e=>{
     let C_Type = e.data.map((item) =>
       <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>,

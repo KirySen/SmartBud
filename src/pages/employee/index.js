@@ -20,7 +20,6 @@ export default class Employee extends Component {
   };
 
   SearchEmployee = () => {
-    console.log('SearchEmployee');
   };
 
   showModal = () => {
@@ -34,30 +33,36 @@ export default class Employee extends Component {
       visible: false,
     });
   };
-
-
   handleCancel = () => {
     this.setState({
       visible: false,
     });
   };
 
-  confirm = (e) => {
-    this.deleteEmployee(e);
-    message.success('成功删除');
+  confirm = (id) => {
+    console.log(id);
+    fetch(`/api/employee/${id}/delete`,{
+      method:'POST',
+    })
+      .then(e=>{
+        if (e.ok) {
+          message.success('新建成功');
+        return e.json()
+      } else {
+        return Promise.reject('出错啦!')
+      }})
+      .catch(e=>message.error(e));
   };
-
   cancel = () => {
     message.error('取消删除');
   };
-
-  deleteEmployee = (index) => {
-    console.log(index);
-  };
-
   loading = () => {
     fetch('/api/employee/all')
-      .then(response => response.json())
+      .then(e=>{if (e.ok) {
+        return e.json()
+      } else {
+        return Promise.reject('出错啦!')
+      }})
       .then(data => {
         this.setState({
           employeeList: data,
@@ -96,10 +101,10 @@ export default class Employee extends Component {
       {
         title: '操作',
         dataIndex: 'operation',
-        render: (text, index) => (
+        render: (text, record) => (
           <Popconfirm
-            title={`确定删除${index.name}?`}
-            onConfirm={this.confirm.bind(this, index.uid)}
+            title={`确定删除${record.name}?`}
+            onConfirm={this.confirm.bind(this, record)}
             onCancel={this.cancel}
             okText={'确定'}
             cancelText={'取消'}
