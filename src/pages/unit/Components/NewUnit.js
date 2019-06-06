@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Select, Icon, Modal ,Button,message} from 'antd';
 import GaoDeMap from './MapForm';
-
+import axios from 'axios'
 class unit extends Component {
   state = {
     MapVisible: false,    //新建Modal
@@ -25,27 +25,14 @@ class unit extends Component {
       console.log('values: ',values);
       if (!err){
         if (!this.props.record.uid) {
-        fetch('/api/company/add', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(values)
-        })
-          .then(e=>{if (e.ok) {
-            return e.json()
-          } else {
-            return Promise.reject('出错啦!')
-          }})
-          .catch(e =>message.error(e))
-        }else{
-          fetch(`/api/company/${this.props.record.unitNumber}/update`,{
-          method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body:JSON.stringify(values)
-          })
+       axios.post('/api/company/add',(values)
+        )
+         .then(e=>console.log(e))
+         .catch(e=>message.error(e))
+        }
+        else{
+          axios.post(`/api/company/${this.props.record.unitNumber}/update`,(values))
+            .then(e=>console.log(e))
             .catch(e=>message.error(e))
         }
       }

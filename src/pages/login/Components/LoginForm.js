@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Input, Form, Icon, message, Row, Col } from 'antd/lib/index';
-
+import axios from 'axios'
 import Style from '@/pages/login/index.less';
 
 class Login extends Component {
@@ -8,24 +8,21 @@ class Login extends Component {
     loading:false
   };
   handleSubmit = (e)=> {
+    let that = this;
     e.preventDefault();
     this.props.form.validateFields((error, values)=>{
       if (!error) {
-        fetch('/api/user/login',{
-          method:'POST',
-          body:JSON.stringify(values)
-        })
-          .then(e=>{})
+        axios.post(`/api/user/login?username=${values.username}&password=${values.password}`,)
           .then((data)=>{
             message.success('登录成功');
-            this.setState({
+            that.setState({
               loading:true
             });
             this.props.onSuccess(data)
           })
           .catch((e)=>{
             message.error(e);
-            this.setState({
+            that.setState({
               loading:false
             })
           });

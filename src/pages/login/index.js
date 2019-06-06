@@ -15,7 +15,7 @@ class Login extends Component {
           <div className={styles.top}>
             <div className={styles.header}>
               <a href={'/'}>
-                <img className={styles.logo} src={logo}/>
+                <img alt='logo' className={styles.logo} src={logo}/>
                 <span className={styles.title}>SmartBud</span>
               </a>
 

@@ -9,7 +9,6 @@ export default class Employee extends Component {
     employeeList: null,     // 员工数据
     selected: {},
     visible: false,         // 模态框
-
   };
 
 

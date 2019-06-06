@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Input, Table, Modal, Dropdown, Icon, Menu, message } from 'antd';
 import NewUnit from './Components/NewUnit';
+import  axios  from 'axios';
 
 export default class unit extends Component {
   state = {
@@ -18,20 +19,16 @@ export default class unit extends Component {
   }
 
   loading = () => {
-    fetch('/api/unit/all')
-      .then(e=>{if (e.ok) {
-        return e.json()
-      } else {
-        return Promise.reject('出错啦!')
-      }})
-      .then(data => {
-        console.log(data);
-        this.setState({
-          unitList: data,
-        });
+    axios.get('/api/company/list')
+      .then(function (response) {
+        console.log(response);
+        let _that = this;
+        _that.setState({
+          unitList:response.data
+        })
       })
-      .catch(() => {
-        message.error('获取数据失败！');
+      .catch(function (error) {
+        message.error(error);
       });
   };
   /*
@@ -59,18 +56,11 @@ export default class unit extends Component {
     });
   };
   SearchUnit = () => {
-    fetch(`/api/company/list?name=${encodeURI(this.state.Keywords)}`, {
-      method: 'GET',
-    })
-      .then(e=>{if (e.ok) {
-        return e.json()
-      } else {
-        return Promise.reject('出错啦!')
-      }})
+    axios.get(`/api/company?name=${encodeURI(this.state.Keywords)}`)
       .then((data) => {
-        this.setState({ unitList: data });
+        this.setState({ unitList:data.data });
       })
-      .catch(e => message.error(e));
+      .catch(e => new Error(e))
   };
   /*
     * 表格onChange事件
@@ -126,7 +116,7 @@ export default class unit extends Component {
         title: '操作', dataIndex: 'operation',
         render: (text, record) => (
           <Dropdown overlay={this.handleDropdown(text,record)} trigger={['hover']}>
-            <a>
+            <a href={' '}>
               操作 <Icon type="caret-down"/>
             </a>
           </Dropdown>

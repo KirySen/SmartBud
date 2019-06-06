@@ -1,9 +1,7 @@
 
-// ref: https://umijs.org/config/
 export default {
   treeShaking: true,
   plugins: [
-    // ref: https://umijs.org/plugin/umi-plugin-react.html
     ['umi-plugin-react', {
       antd: true,
       dva: true,
@@ -20,14 +18,13 @@ export default {
           /components\//,
         ],
       },
-      'proxy': {
-        '/api': {
-          'target': 'http://localhost:8080',
-            'changeOrigin': true,
-          'pathRewrite': { '^/api': '' },
-        },
-      },
     }],
   ],
-
+  'proxy': {
+    '/api': {
+      'target': 'http://localhost:8080',
+      'pathRewrite': { '^/api': '' },
+      'changeOrigin': true
+    }
+  }
 }

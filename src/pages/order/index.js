@@ -1,23 +1,20 @@
 import React,{Component} from 'react'
 import { Button, Input, Popconfirm, Table,message } from 'antd';
 import router from 'umi/router'
+import axios from 'axios'
 export default class Index extends Component{
   state={
     orderList:null,
     clickTableItem:[],
     selected:{},
+    ser:null
   };
   componentDidMount(){
     this.loading()
   }
   loading = ()=>{
-    fetch('/api/order/list')
-      .then(e=>{if (e.ok) {
-        return e.json()
-      } else {
-        return Promise.reject('出错啦!')
-      }})
-      .then((data)=>{this.setState({orderList:data})})
+   axios.get('/api/order/list')
+      .then((data)=>{this.setState({orderList:data.data})})
       .catch(e=>message.error(e))
   };
   onChangeTable = (selectedRowKeys, selectedRows) => {
@@ -31,9 +28,22 @@ export default class Index extends Component{
     router.replace('./order/newList')
   };
   confirm=(id)=>{
-    fetch(`/api/order/${id}/remove`)
+    axios.post(`/api/order/${id}/remove`)
       .then(e=>{})
       .catch(e=>message.error(e))
+  };
+  Search = ()=>{
+    axios.get(`/api/order?accept=${this.state.ser}`)
+      .then(function (response) {
+        console.log(response);
+        // let _that = this;
+        // _that.setState({
+        //   orderList:response.data
+        // })
+      })
+      .catch(function (error) {
+        message.error(error);
+      });
   };
   render(){
     const columns= [
@@ -69,10 +79,10 @@ export default class Index extends Component{
         <div className="page-filter">
           <ul>
             <li>
-              <Input placeholder={'订单编号'} />
+              <Input placeholder={'受理人'} onChange={(e)=>{this.setState({ser:e.target.value})}}/>
             </li>
             <li>
-              <Button>搜索</Button>
+              <Button onClick={this.Search}>搜索</Button>
             </li>
           </ul>
         </div>
@@ -81,7 +91,7 @@ export default class Index extends Component{
             columns={columns}
             dataSource={this.state.orderList}
             rowSelection={{ electedRowKeys: this.state.selected, selections: true, onChange: this.onChangeTable }}
-            rowKey="uid" pagination={{ pageSize: 10 }}
+            rowKey="id" pagination={{ pageSize: 10 }}
           />
         </div>
       </div>

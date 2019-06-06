@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Icon, LocaleProvider } from 'antd';
+import { Icon, Layout, LocaleProvider, Menu } from 'antd';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
@@ -29,6 +29,7 @@ export default class Index extends Component {
     const SubMenu = Menu.SubMenu;
     const { location: { pathname } } = this.props;
     let children = this.props.children;
+    console.log(children);
     return (
       <LocaleProvider locale={zh_CN}>
         {this.state.isLogin ?
@@ -49,12 +50,12 @@ export default class Index extends Component {
                     <span><Icon type="form"/>工单管理</span>
                   }
                 >
-                  <Menu.Item key="List">
+                  <Menu.Item key="/List">
                     <Link to='/order'>
                       <span><Icon type="snippets"/>工单列表</span>
                     </Link>
                   </Menu.Item>
-                  <Menu.Item key="/order">
+                  <Menu.Item key="/createOrder">
                     <Link to='/order/newList'>
                       <span><Icon type="snippets"/>创建工单</span>
                     </Link>

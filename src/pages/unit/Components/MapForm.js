@@ -50,10 +50,7 @@ class Callas extends Component {
                 message: '请选择校区位置',
               }]
             },
-          )
-          (
-            <Input disabled={true}/>
-          )}
+          )(<Input disabled={true}/>)}
         </FormItem>
         <AMap setMarker={this.setMarker}/>
         <FormItem>

@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
 import { Form, Input, InputNumber, message, Select,Button } from 'antd';
-
+import axios from 'axios'
 class Work extends Component{
 state={
   UnitList:null
 };
 getUnit=()=>{
-
-fetch('/api/company/list')
-  .then(e=>{})
-  .then(e=>{
-    let C_Type = e.data.map((item) =>
-      <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>,
-    );
-    this.setState({
-      UnitList: C_Type,
+  axios.post('/api/company/list' )
+    .then(function (e) {
+      let C_Type = e.data.map((item) =>
+        <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>,
+      );
+      this.setState({
+        UnitList: C_Type,
+      });
+    })
+    .catch(function (error) {
+      message.error(error)
     });
-  })
-  .catch(
-    message.error('单位列表获取失败')
-  )
 };
   Check  = ()=>{
     this.props.form.validateFields((err,values)=>{
