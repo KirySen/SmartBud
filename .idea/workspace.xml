@@ -4,22 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/pages/order/newList.js" line="145" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="486b69b4-12f4-4384-b18e-c348c06aa338" name="默认更改列表" comment="set">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.umirc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.umirc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mock/unit.js" beforeDir="false" afterPath="$PROJECT_DIR$/mock/unit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/employee/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/employee/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login/Components/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login/Components/LoginForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/order/Components/Workorder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/order/Components/Workorder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/order/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/order/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/order/newList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/order/newList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/unit/Components/MapForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/unit/Components/MapForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/unit/Components/NewUnit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/unit/Components/NewUnit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/unit/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/unit/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="486b69b4-12f4-4384-b18e-c348c06aa338" name="默认更改列表" comment="set" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -31,7 +16,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/unit/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="308">
@@ -91,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/order/Components/Workorder.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+            <state relative-caret-position="644">
+              <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -329,7 +314,7 @@
       <workItem from="1559696521313" duration="8656000" />
       <workItem from="1559728088691" duration="57000" />
       <workItem from="1559753095493" duration="1506000" />
-      <workItem from="1559780295907" duration="23274000" />
+      <workItem from="1559780295907" duration="23531000" />
     </task>
     <task id="LOCAL-00001" summary="Demo">
       <created>1559132738436</created>
@@ -422,11 +407,18 @@
       <option name="project" value="LOCAL" />
       <updated>1559652422069</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="set">
+      <created>1559811745809</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1559811745809</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="169834000" />
+    <option name="totallyTimeSpent" value="170091000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -753,16 +745,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/order/Components/Workorder.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/order/newList.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
@@ -807,6 +789,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/order/Components/Workorder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="644">
+          <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
