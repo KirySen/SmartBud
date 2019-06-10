@@ -74,7 +74,9 @@ export default class Index extends Component {
             <Layout>
               <Header style={{ background: '#fff', padding: 0 }}/>
               <Content style={{ margin: '0 16px' }}>
-                {children}
+                {children &&children.props.children.map(child=>{
+                  return child
+                })}
               </Content>
               <Footer style={{ textAlign: 'center' }}>SmartBud ©2019</Footer>
             </Layout>

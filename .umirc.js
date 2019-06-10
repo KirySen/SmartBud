@@ -23,7 +23,7 @@ export default {
   'proxy': {
     '/api': {
       'target': 'http://localhost:8080',
-      'pathRewrite': { '^/api': '' },
+      "pathRewrite": { "^/api" : "/" },
       'changeOrigin': true
     }
   }
